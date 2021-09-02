@@ -1,206 +1,108 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
+import java.util.List;
 
-public class Hotline {
-    static boolean restart = true;
-    String base;
-    char[] numchars_1 = new char[3];
-    char[] numchars_2 = new char[4];
-
-
+public class Hotline extends ArrayList {
     static Scanner sc = new Scanner(System.in);
 
-    public void getNumbers(){
-        System.out.print("Enter word: ");
-        base = sc.nextLine();
-
-        base = base.toUpperCase();
-        char[] basechars = base.toCharArray();
-        char[] refinedchars = charChecks(basechars);
-
-        System.out.print("1-800-");
-        System.out.println(splitterandconverter(refinedchars));
-    }
-    
-    public char[] splitterandconverter(char[] workingchars){
-        
-        char[] splitchars1 = new char[3];
-        char[] splitchars2 = new char[4];
-        
-        for (int i=0; i<3;i++) {
-            System.arraycopy(workingchars, i, splitchars1, i, 1);
+    public static char[] initializer(char[] letters){
+        boolean greenlightraw = true;
+        List<Character> initialized = new ArrayList<>();
+        ArrayList<Character> raw = new ArrayList<>();
+        for (int i = 0; i < letters.length; i++) {
+            raw.add(letters[i]);
         }
-            System.arraycopy(workingchars, 3, splitchars2, 0, 1);
-            System.arraycopy(workingchars, 4, splitchars2, 1, 1);
-            System.arraycopy(workingchars, 5, splitchars2, 2, 1);
-            System.arraycopy(workingchars, 6, splitchars2, 3, 1);
+        char[] finalarr = new char[8];
 
-        return converter(splitchars1,splitchars2);
-    }
-    
-    public char[] charChecks(char[] toCheck){
-        char[] workingarr;
-        char[] checkedchars = new char[7];
+        for (int i = 0; i < raw.size(); i++) {
+            if (raw.get(i) == ' '){
+                raw.remove(i);
+            }
+        }
 
-
-
-        if (toCheck.length > 7 ) {
-
-            workingarr = Arrays.copyOfRange(toCheck, 0, 8);
-
-            for (int i = 0; i < workingarr.length; i++) {
-                if (workingarr[i] == ' ') {
-                    checkedchars = removeChars(workingarr, i);
+        if (raw.size()>7) {
+            initialized = raw.subList(0, 8);
+            finalarr = makeNumbers(initialized);
+            greenlightraw = false;
+        }
+        if (raw.size()<7){
+            for (int i = 0; i < raw.size(); i++) {
+                initialized.add(i,raw.get(i));
+                int zerosNeeded = 7 - initialized.size();
+                for (int j = initialized.size(); j < zerosNeeded; j++) {
+                    initialized.add(j, '0');
                 }
             }
+            finalarr = makeNumbers(initialized);
+            greenlightraw = false;
         }
-        char[] tempholding = {'0','0','0','0','0','0','0'};
-
-        if (toCheck.length < 7) {
-            int arrval = toCheck.length;
-            for (int i = 0; i < arrval; i++) {
-                System.arraycopy(toCheck, i, tempholding, i, 1);
-            }
-            checkedchars = tempholding;
-            System.out.println(checkedchars);
-
+        if (greenlightraw) {
+            finalarr = makeNumbers(raw);
         }
-        if (toCheck.length < 8){
-
-
-            for (int i = 0; i < tempholding.length; i++) {
-
-                if (tempholding[i] == ' ') {
-                    checkedchars = removeChars(toCheck, i);
-                }
-
-            }
-        }
-
-        return checkedchars;
+        return finalarr;
     }
 
-    public char[] removeChars(char[] arr, int index){
+    private static char[] makeNumbers(List<Character> lettersInput) {
 
-        if (arr == null
-                || index < 0
-                || index >= arr.length) {
+        char[] outputArray = new char[8];
 
-            return arr;
-        }
+        for (int i = 0; i < 7; i++) {
 
-        char[] tempHolding = new char[arr.length - 1];
-
-        for (int i = 0, k = 0; i < arr.length; i++) {
-
-            if (i == index) {
-                continue;
+            if (lettersInput.get(i) == '0') {
+                outputArray[i] = '0';
             }
-
-            tempHolding[k++] = arr[i];
-        }
-
-        return tempHolding;
-
-    }
-
-    public char[] converter(char[] finalchars_1,char[] finalchars_2){
-
-        for (int i=0; i < 3; i++){
-
-            if (finalchars_1[i] == '0'){
-                numchars_1[i] = '0';
+            if (lettersInput.get(i) == 'A' || lettersInput.get(i) == 'B' || lettersInput.get(i) == 'C') {
+                outputArray[i] = '2';
             }
-            if (finalchars_1[i] == 'A' || finalchars_1[i] == 'B'|| finalchars_1[i] == 'C'){
-                numchars_1[i] = '2';
+            if (lettersInput.get(i) == 'D' || lettersInput.get(i) == 'E' || lettersInput.get(i) == 'F') {
+                outputArray[i] = '3';
             }
-            if (finalchars_1[i] == 'D'||finalchars_1[i] == 'E' || finalchars_1[i] == 'F' ){
-                numchars_1[i] = '3';
+            if (lettersInput.get(i) == 'G' || lettersInput.get(i) == 'H' || lettersInput.get(i) == 'I') {
+                outputArray[i] = '4';
             }
-            if (finalchars_1[i] == 'G'||finalchars_1[i] == 'H' || finalchars_1[i] == 'I' ){
-                numchars_1[i] = '4';
+            if (lettersInput.get(i) == 'J' || lettersInput.get(i) == 'K' || lettersInput.get(i) == 'L') {
+                outputArray[i] = '5';
             }
-            if (finalchars_1[i] == 'J'||finalchars_1[i] == 'K' || finalchars_1[i] == 'L' ){
-                numchars_1[i] = '5';
+            if (lettersInput.get(i) == 'M' || lettersInput.get(i) == 'N' || lettersInput.get(i) == 'O') {
+                outputArray[i] = '6';
             }
-            if (finalchars_1[i] == 'M'||finalchars_1[i] == 'N' || finalchars_1[i] == 'O' ){
-                numchars_1[i] = '6';
+            if (lettersInput.get(i) == 'P' || lettersInput.get(i) == 'Q' || lettersInput.get(i) == 'R' || lettersInput.get(i) == 'S') {
+                outputArray[i] = '7';
             }
-            if (finalchars_1[i] == 'P'||finalchars_1[i] == 'Q' || finalchars_1[i] == 'R'|| finalchars_1[i] == 'S' ){
-                numchars_1[i] = '7';
+            if (lettersInput.get(i) == 'T' || lettersInput.get(i) == 'U' || lettersInput.get(i) == 'V') {
+                outputArray[i] = '8';
             }
-            if (finalchars_1[i] == 'T'||finalchars_1[i] == 'U' || finalchars_1[i] == 'V' ){
-                numchars_1[i] = '8';
-            }
-            if (finalchars_1[i] == 'W'||finalchars_1[i] == 'X' || finalchars_1[i] == 'Y'|| finalchars_1[i] == 'Z' ){
-                numchars_1[i] = '9';
+            if (lettersInput.get(i) == 'W' || lettersInput.get(i) == 'X' || lettersInput.get(i) == 'Y' || lettersInput.get(i) == 'Z') {
+                outputArray[i] = '9';
             }
 
         }
 
-        for (int i=0; i < 4; i++){
+        char[] finaloutputArray= new char[8];
+        System.arraycopy(outputArray, 0, finaloutputArray, 0, 1);
+        System.arraycopy(outputArray, 1, finaloutputArray, 1, 1);
+        System.arraycopy(outputArray, 2, finaloutputArray, 2, 1);
+        finaloutputArray[3] = '-';
+        System.arraycopy(outputArray, 3, finaloutputArray, 4, 1);
+        System.arraycopy(outputArray, 4, finaloutputArray, 5, 1);
+        System.arraycopy(outputArray, 5, finaloutputArray, 6, 1);
+        System.arraycopy(outputArray, 6, finaloutputArray, 7, 1);
 
-            if (finalchars_2[i] == '0'){
-                numchars_2[i] = '0';
-            }
-            if (finalchars_2[i] == 'A' || finalchars_2[i] == 'B'|| finalchars_2[i] == 'C'){
-                numchars_2[i] = '2';
-            }
-            if (finalchars_2[i] == 'D'||finalchars_2[i] == 'E' || finalchars_2[i] == 'F' ){
-                numchars_2[i] = '3';
-            }
-            if (finalchars_2[i] == 'G'||finalchars_2[i] == 'H' || finalchars_2[i] == 'I' ){
-                numchars_2[i] = '4';
-            }
-            if (finalchars_2[i] == 'J'||finalchars_2[i] == 'K' || finalchars_2[i] == 'L' ){
-                numchars_2[i] = '5';
-            }
-            if (finalchars_2[i] == 'M'||finalchars_2[i] == 'N' || finalchars_2[i] == 'O' ){
-                numchars_2[i] = '6';
-            }
-            if (finalchars_2[i] == 'P'||finalchars_2[i] == 'Q' || finalchars_2[i] == 'R'|| finalchars_2[i] == 'S' ){
-                numchars_2[i] = '7';
-            }
-            if (finalchars_2[i] == 'T'||finalchars_2[i] == 'U' || finalchars_2[i] == 'V' ){
-                numchars_2[i] = '8';
-            }
-            if (finalchars_2[i] == 'W'||finalchars_2[i] == 'X' || finalchars_2[i] == 'Y'|| finalchars_2[i] == 'Z' ){
-                numchars_2[i] = '9';
-            }
 
-        }
 
-        char[] finalnums = new char[8];
-        System.arraycopy(numchars_1, 0, finalnums, 0, 1);
-        System.arraycopy(numchars_1, 1, finalnums, 1, 1);
-        System.arraycopy(numchars_1, 2, finalnums, 2, 1);
-        finalnums[3] = '-';
-        System.arraycopy(numchars_2, 0, finalnums, 4, 1);
-        System.arraycopy(numchars_2, 1, finalnums, 5, 1);
-        System.arraycopy(numchars_2, 2, finalnums, 6, 1);
-        System.arraycopy(numchars_2, 3, finalnums, 7, 1);
+        return finaloutputArray;
 
-        return finalnums;
-
-    }
-
-    public Hotline(){
-
-        getNumbers();
     }
 
     public static void main(String[] args) {
+        System.out.print("Enter a phrase: ");
+        String userInput = sc.nextLine();
+        userInput = userInput.toUpperCase();
+        char[] userInputArray = userInput.toCharArray();
 
-        while (restart) {
-            new Hotline();
-            System.out.println("Restart? ");
-            String userrestart = sc.nextLine();
 
-            if (userrestart.equals("no") || userrestart.equals("No")){
-                restart = false;
-            }
-
-        }
+        System.out.print("1-800-");
+        System.out.println(initializer(userInputArray));
     }
-
 }
+
+
