@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.List;
 
-public class Hotline extends ArrayList implements List {
+public class Hotline {
 
     //scanner obj. and restart boolean
     static Scanner sc = new Scanner(System.in);
@@ -15,8 +15,8 @@ public class Hotline extends ArrayList implements List {
         List<Character> initialized = new ArrayList<>();
         //input list and for loop to make array into list
         ArrayList<Character> raw = new ArrayList<>();
-        for (int i = 0; i < letters.length; i++) {
-            raw.add(letters[i]);
+        for (char letter : letters) {
+            raw.add(letter);
         }
         //final array initialized
         char[] finalarr = new char[8];
@@ -39,7 +39,7 @@ public class Hotline extends ArrayList implements List {
         if (raw.size()<7){
             for (int i = 0; i < raw.size(); i++) {
                 initialized.add(i,raw.get(i));
-                int zerosNeeded = 7 - initialized.size();
+                int zerosNeeded = 8 - initialized.size();
                 for (int j = initialized.size(); j < zerosNeeded; j++) {
                     initialized.add(j, '0');
                 }
@@ -60,57 +60,124 @@ public class Hotline extends ArrayList implements List {
     //coverts checked array into final form
     private static char[] makeNumbers(List<Character> lettersInput) {
         //array to iterate into
-        char[] outputArray = new char[8];
+        char[] finaloutputchar = new char[8];
 
         for (int i = 0; i < 7; i++) {
-            //keep 0 as 0
-            if (lettersInput.get(i) == '0') {
-                outputArray[i] = '0';
-            }
             //if's from here are to keep numbers as they are
-            if (lettersInput.get(i) >= '1' && lettersInput.get(i) <= '9'){
-                outputArray[i] = lettersInput.get(i);
+            if (lettersInput.get(i) >= '0' && lettersInput.get(i) <= '9') {
+                lettersInput.set(i,lettersInput.get(i));
             }
+            //makes special chars = 0
+            if (32 < lettersInput.get(i) && lettersInput.get(i) < 48 || 57 < lettersInput.get(i) && lettersInput.get(i) < 65 ||
+                    90 < lettersInput.get(i) && lettersInput.get(i) < 97 || 122 < lettersInput.get(i) && lettersInput.get(i) < 127){
+                lettersInput.set(i,'0');
+            }
+            //compares and assigns values
+            switch (lettersInput.get(i)){
+                case 'A': lettersInput.set(i, '2');
+                    break;
+                case 'B': lettersInput.set(i, '2');
+                    break;
+                case 'C': lettersInput.set(i, '2');
+                    break;
+
+                case 'D': lettersInput.set(i, '3');
+                    break;
+                case 'E': lettersInput.set(i, '3');
+                    break;
+                case 'F': lettersInput.set(i, '3');
+                    break;
+
+                case 'G': lettersInput.set(i, '4');
+                    break;
+                case 'H': lettersInput.set(i, '4');
+                    break;
+                case 'I': lettersInput.set(i, '4');
+                    break;
+
+                case 'J': lettersInput.set(i, '5');
+                    break;
+                case 'K': lettersInput.set(i, '5');
+                    break;
+                case 'L': lettersInput.set(i, '5');
+                    break;
+
+                case 'M': lettersInput.set(i, '6');
+                    break;
+                case 'N': lettersInput.set(i, '6');
+                    break;
+                case 'O': lettersInput.set(i, '6');
+                    break;
+
+                case 'P': lettersInput.set(i, '7');
+                    break;
+                case 'Q': lettersInput.set(i, '7');
+                    break;
+                case 'R': lettersInput.set(i, '7');
+                    break;
+                case 'S': lettersInput.set(i, '7');
+                    break;
+
+                case 'T': lettersInput.set(i, '8');
+                    break;
+                case 'U': lettersInput.set(i, '8');
+                    break;
+                case 'V': lettersInput.set(i, '8');
+                    break;
+
+                case 'W': lettersInput.set(i, '9');
+                    break;
+                case 'X': lettersInput.set(i, '9');
+                    break;
+                case 'Y': lettersInput.set(i, '9');
+                    break;
+                case 'Z': lettersInput.set(i, '9');
+                    break;
+
+            }
+
             //if's from here are to convert alphabets to keypad numbers
+            /*
             if (lettersInput.get(i) == 'A' || lettersInput.get(i) == 'B' || lettersInput.get(i) == 'C') {
-                outputArray[i] = '2';
+                lettersInput.set(i,'2');
             }
             if (lettersInput.get(i) == 'D' || lettersInput.get(i) == 'E' || lettersInput.get(i) == 'F') {
-                outputArray[i] = '3';
+                lettersInput.set(i,'3');
             }
             if (lettersInput.get(i) == 'G' || lettersInput.get(i) == 'H' || lettersInput.get(i) == 'I') {
-                outputArray[i] = '4';
+                lettersInput.set(i,'4');
             }
             if (lettersInput.get(i) == 'J' || lettersInput.get(i) == 'K' || lettersInput.get(i) == 'L') {
-                outputArray[i] = '5';
+                lettersInput.set(i,'5');
             }
             if (lettersInput.get(i) == 'M' || lettersInput.get(i) == 'N' || lettersInput.get(i) == 'O') {
-                outputArray[i] = '6';
+                lettersInput.set(i,'6');
             }
             if (lettersInput.get(i) == 'P' || lettersInput.get(i) == 'Q' || lettersInput.get(i) == 'R' || lettersInput.get(i) == 'S') {
-                outputArray[i] = '7';
+                lettersInput.set(i,'7');
             }
             if (lettersInput.get(i) == 'T' || lettersInput.get(i) == 'U' || lettersInput.get(i) == 'V') {
-                outputArray[i] = '8';
+                lettersInput.set(i,'8');
             }
             if (lettersInput.get(i) == 'W' || lettersInput.get(i) == 'X' || lettersInput.get(i) == 'Y' || lettersInput.get(i) == 'Z') {
-                outputArray[i] = '9';
+                lettersInput.set(i,'9');
             }
-        }
-        //setting up the final array that will be printed (finalising by adding '-')
-        char[] finaloutputArray= new char[8];
-        System.arraycopy(outputArray, 0, finaloutputArray, 0, 1);
-        System.arraycopy(outputArray, 1, finaloutputArray, 1, 1);
-        System.arraycopy(outputArray, 2, finaloutputArray, 2, 1);
-        finaloutputArray[3] = '-';
-        System.arraycopy(outputArray, 3, finaloutputArray, 4, 1);
-        System.arraycopy(outputArray, 4, finaloutputArray, 5, 1);
-        System.arraycopy(outputArray, 5, finaloutputArray, 6, 1);
-        System.arraycopy(outputArray, 6, finaloutputArray, 7, 1);
+            //makes special chars = 0
+            if (32 < lettersInput.get(i) && lettersInput.get(i) < 48 || 57 < lettersInput.get(i) && lettersInput.get(i) < 65 ||
+                    90 < lettersInput.get(i) && lettersInput.get(i) < 97 || 122 < lettersInput.get(i) && lettersInput.get(i) < 127){
+                lettersInput.set(i,'0');
+               }
+             */
 
+        }
+
+        lettersInput.add(3,'-');
+        for (int i = 0; i < 8; i++) {
+            finaloutputchar[i] = lettersInput.get(i);
+        }
 
         //returns final values
-        return finaloutputArray;
+        return finaloutputchar;
 
     }
 
