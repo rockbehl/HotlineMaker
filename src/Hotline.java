@@ -1,10 +1,11 @@
 import java.util.*;
 import java.util.List;
 
-public class Hotline extends ArrayList {
+public class Hotline extends ArrayList implements List {
 
-    //scanner obj.
+    //scanner obj. and restart boolean
     static Scanner sc = new Scanner(System.in);
+    static boolean restart = true;
 
     //makes sure array meets all initial requirements
     public static char[] initializer(char[] letters){
@@ -70,14 +71,6 @@ public class Hotline extends ArrayList {
             if (lettersInput.get(i) >= '1' && lettersInput.get(i) <= '9'){
                 outputArray[i] = lettersInput.get(i);
             }
-            if (lettersInput.get(i) >= '1' && lettersInput.get(i) <= '9' && lettersInput.get(i+1) == '0'){
-                outputArray[i] = lettersInput.get(i);
-                outputArray[i+1] = lettersInput.get(i+1);
-            }
-            if (lettersInput.get(i) >= '1' && lettersInput.get(i) <= '9' && lettersInput.get(i+1) >='1' && lettersInput.get(i) <= '9'){
-                outputArray[i] = lettersInput.get(i);
-                outputArray[i+1] = lettersInput.get(i+1);
-            }
             //if's from here are to convert alphabets to keypad numbers
             if (lettersInput.get(i) == 'A' || lettersInput.get(i) == 'B' || lettersInput.get(i) == 'C') {
                 outputArray[i] = '2';
@@ -123,18 +116,28 @@ public class Hotline extends ArrayList {
 
     //psvm function
     public static void main(String[] args) {
-        //asks for user input
-        System.out.print("Enter a phrase: ");
-        String userInput = sc.nextLine();
-        //forces user input to one case
-        userInput = userInput.toUpperCase();
-        //initializing base array
-        char[] userInputArray = userInput.toCharArray();
 
-        //adding final touches
-        System.out.print("1-800-");
-        //printing the function that has all the code
-        System.out.println(initializer(userInputArray));
+        while (restart) {
+            //asks for user input
+            System.out.print("Enter a phrase: ");
+            String userInput = sc.nextLine();
+            //forces user input to one case
+            userInput = userInput.toUpperCase();
+            //initializing base array
+            char[] userInputArray = userInput.toCharArray();
+
+            //adding final touches
+            System.out.print("1-800-");
+            //printing the function that has all the code
+            System.out.println(initializer(userInputArray));
+
+            //restart process
+            System.out.println("Restart? ");
+            String restartInput = sc.nextLine();
+            if (restartInput.equals("no") || restartInput.equals("No")){
+                restart = false;
+            }
+        }
     }
 }
 
