@@ -8,7 +8,7 @@ public class Hotline {
     static boolean restart = true;
 
     //makes sure array meets all initial requirements
-    public static char[] initializer(char[] letters){
+    public static char[] verifyAndConvert(char[] letters){
         //boolean to indicate user input was perfect(ish)
         boolean greenlightraw = true;
         //List to be converted
@@ -72,102 +72,37 @@ public class Hotline {
                     90 < lettersInput.get(i) && lettersInput.get(i) < 97 || 122 < lettersInput.get(i) && lettersInput.get(i) < 127){
                 lettersInput.set(i,'0');
             }
+
             //compares and assigns values
-            switch (lettersInput.get(i)){
-                case 'A': lettersInput.set(i, '2');
-                    break;
-                case 'B': lettersInput.set(i, '2');
-                    break;
-                case 'C': lettersInput.set(i, '2');
-                    break;
-
-                case 'D': lettersInput.set(i, '3');
-                    break;
-                case 'E': lettersInput.set(i, '3');
-                    break;
-                case 'F': lettersInput.set(i, '3');
-                    break;
-
-                case 'G': lettersInput.set(i, '4');
-                    break;
-                case 'H': lettersInput.set(i, '4');
-                    break;
-                case 'I': lettersInput.set(i, '4');
-                    break;
-
-                case 'J': lettersInput.set(i, '5');
-                    break;
-                case 'K': lettersInput.set(i, '5');
-                    break;
-                case 'L': lettersInput.set(i, '5');
-                    break;
-
-                case 'M': lettersInput.set(i, '6');
-                    break;
-                case 'N': lettersInput.set(i, '6');
-                    break;
-                case 'O': lettersInput.set(i, '6');
-                    break;
-
-                case 'P': lettersInput.set(i, '7');
-                    break;
-                case 'Q': lettersInput.set(i, '7');
-                    break;
-                case 'R': lettersInput.set(i, '7');
-                    break;
-                case 'S': lettersInput.set(i, '7');
-                    break;
-
-                case 'T': lettersInput.set(i, '8');
-                    break;
-                case 'U': lettersInput.set(i, '8');
-                    break;
-                case 'V': lettersInput.set(i, '8');
-                    break;
-
-                case 'W': lettersInput.set(i, '9');
-                    break;
-                case 'X': lettersInput.set(i, '9');
-                    break;
-                case 'Y': lettersInput.set(i, '9');
-                    break;
-                case 'Z': lettersInput.set(i, '9');
-                    break;
-
+            switch (lettersInput.get(i)) {
+                case 'A' -> lettersInput.set(i, '2');
+                case 'B' -> lettersInput.set(i, '2');
+                case 'C' -> lettersInput.set(i, '2');
+                case 'D' -> lettersInput.set(i, '3');
+                case 'E' -> lettersInput.set(i, '3');
+                case 'F' -> lettersInput.set(i, '3');
+                case 'G' -> lettersInput.set(i, '4');
+                case 'H' -> lettersInput.set(i, '4');
+                case 'I' -> lettersInput.set(i, '4');
+                case 'J' -> lettersInput.set(i, '5');
+                case 'K' -> lettersInput.set(i, '5');
+                case 'L' -> lettersInput.set(i, '5');
+                case 'M' -> lettersInput.set(i, '6');
+                case 'N' -> lettersInput.set(i, '6');
+                case 'O' -> lettersInput.set(i, '6');
+                case 'P' -> lettersInput.set(i, '7');
+                case 'Q' -> lettersInput.set(i, '7');
+                case 'R' -> lettersInput.set(i, '7');
+                case 'S' -> lettersInput.set(i, '7');
+                case 'T' -> lettersInput.set(i, '8');
+                case 'U' -> lettersInput.set(i, '8');
+                case 'V' -> lettersInput.set(i, '8');
+                case 'W' -> lettersInput.set(i, '9');
+                case 'X' -> lettersInput.set(i, '9');
+                case 'Y' -> lettersInput.set(i, '9');
+                case 'Z' -> lettersInput.set(i, '9');
             }
 
-            //if's from here are to convert alphabets to keypad numbers
-            /*
-            if (lettersInput.get(i) == 'A' || lettersInput.get(i) == 'B' || lettersInput.get(i) == 'C') {
-                lettersInput.set(i,'2');
-            }
-            if (lettersInput.get(i) == 'D' || lettersInput.get(i) == 'E' || lettersInput.get(i) == 'F') {
-                lettersInput.set(i,'3');
-            }
-            if (lettersInput.get(i) == 'G' || lettersInput.get(i) == 'H' || lettersInput.get(i) == 'I') {
-                lettersInput.set(i,'4');
-            }
-            if (lettersInput.get(i) == 'J' || lettersInput.get(i) == 'K' || lettersInput.get(i) == 'L') {
-                lettersInput.set(i,'5');
-            }
-            if (lettersInput.get(i) == 'M' || lettersInput.get(i) == 'N' || lettersInput.get(i) == 'O') {
-                lettersInput.set(i,'6');
-            }
-            if (lettersInput.get(i) == 'P' || lettersInput.get(i) == 'Q' || lettersInput.get(i) == 'R' || lettersInput.get(i) == 'S') {
-                lettersInput.set(i,'7');
-            }
-            if (lettersInput.get(i) == 'T' || lettersInput.get(i) == 'U' || lettersInput.get(i) == 'V') {
-                lettersInput.set(i,'8');
-            }
-            if (lettersInput.get(i) == 'W' || lettersInput.get(i) == 'X' || lettersInput.get(i) == 'Y' || lettersInput.get(i) == 'Z') {
-                lettersInput.set(i,'9');
-            }
-            //makes special chars = 0
-            if (32 < lettersInput.get(i) && lettersInput.get(i) < 48 || 57 < lettersInput.get(i) && lettersInput.get(i) < 65 ||
-                    90 < lettersInput.get(i) && lettersInput.get(i) < 97 || 122 < lettersInput.get(i) && lettersInput.get(i) < 127){
-                lettersInput.set(i,'0');
-               }
-             */
 
         }
 
@@ -196,7 +131,7 @@ public class Hotline {
             //adding final touches
             System.out.print("1-800-");
             //printing the function that has all the code
-            System.out.println(initializer(userInputArray));
+            System.out.println(verifyAndConvert(userInputArray));
 
             //restart process
             System.out.println("Restart? ");
@@ -207,5 +142,3 @@ public class Hotline {
         }
     }
 }
-
-
