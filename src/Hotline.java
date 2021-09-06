@@ -21,6 +21,13 @@ public class Hotline {
         //final array initialized
         char[] finalarr = new char[8];
 
+        if (raw.size() == 0){
+            for (int i = 0; i < 8; i++) {
+               raw.add(i,'0');
+            }
+            greenlightraw = true;
+        }
+
         //removes spaces from char list
         for (int i = 0; i < raw.size(); i++) {
             if (raw.get(i) == ' '){
@@ -40,6 +47,7 @@ public class Hotline {
             for (int i = 0; i < raw.size(); i++) {
                 initialized.add(i,raw.get(i));
                 int zerosNeeded = 8 - initialized.size();
+                System.out.println(zerosNeeded);
                 for (int j = initialized.size(); j < zerosNeeded; j++) {
                     initialized.add(j, '0');
                 }
@@ -75,32 +83,14 @@ public class Hotline {
 
             //compares and assigns values
             switch (lettersInput.get(i)) {
-                case 'A' -> lettersInput.set(i, '2');
-                case 'B' -> lettersInput.set(i, '2');
-                case 'C' -> lettersInput.set(i, '2');
-                case 'D' -> lettersInput.set(i, '3');
-                case 'E' -> lettersInput.set(i, '3');
-                case 'F' -> lettersInput.set(i, '3');
-                case 'G' -> lettersInput.set(i, '4');
-                case 'H' -> lettersInput.set(i, '4');
-                case 'I' -> lettersInput.set(i, '4');
-                case 'J' -> lettersInput.set(i, '5');
-                case 'K' -> lettersInput.set(i, '5');
-                case 'L' -> lettersInput.set(i, '5');
-                case 'M' -> lettersInput.set(i, '6');
-                case 'N' -> lettersInput.set(i, '6');
-                case 'O' -> lettersInput.set(i, '6');
-                case 'P' -> lettersInput.set(i, '7');
-                case 'Q' -> lettersInput.set(i, '7');
-                case 'R' -> lettersInput.set(i, '7');
-                case 'S' -> lettersInput.set(i, '7');
-                case 'T' -> lettersInput.set(i, '8');
-                case 'U' -> lettersInput.set(i, '8');
-                case 'V' -> lettersInput.set(i, '8');
-                case 'W' -> lettersInput.set(i, '9');
-                case 'X' -> lettersInput.set(i, '9');
-                case 'Y' -> lettersInput.set(i, '9');
-                case 'Z' -> lettersInput.set(i, '9');
+                case 'A', 'B', 'C' -> lettersInput.set(i, '2');
+                case 'D', 'E', 'F' -> lettersInput.set(i, '3');
+                case 'G', 'H', 'I' -> lettersInput.set(i, '4');
+                case 'J', 'K', 'L' -> lettersInput.set(i, '5');
+                case 'M', 'N', 'O' -> lettersInput.set(i, '6');
+                case 'P', 'Q', 'R', 'S' -> lettersInput.set(i, '7');
+                case 'T', 'U', 'V' -> lettersInput.set(i, '8');
+                case 'W', 'X', 'Y', 'Z' -> lettersInput.set(i, '9');
             }
 
 
